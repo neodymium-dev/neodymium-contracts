@@ -4,14 +4,12 @@ import '@nomiclabs/hardhat-ethers';
 import "@nomiclabs/hardhat-waffle";
 import "@nomiclabs/hardhat-etherscan";
 
+import "./src/scannerkeys"
+
 import {HardhatUserConfig} from "hardhat/types";
 import {DefaultNetworkConfig, DefaultSolidityConfig} from "./src/config";
 
 require('dotenv').config();
-
-const
-	BSCSCAN_API_KEY: string = process.env.BSCSCAN_API_KEY || "",
-	POLYGONSCAN_API_KEY: string = process.env.POLYGONSCAN_API_KEY || "";
 
 const
 	ROOT_DIR: string = "./",
@@ -36,8 +34,13 @@ const hardhatConfig: HardhatUserConfig = {
 	mocha: {
 		timeout: 20000
 	},
+	scannerkeys: {
+		etherscan: process.env.ETHERSCAN_API_KEY,
+		bscscan: process.env.BSCSCAN_API_KEY,
+		polygonscan: process.env.POLYGONSCAN_API_KEY,
+	},
 	etherscan: {
-		apiKey: POLYGONSCAN_API_KEY,
+		apiKey: "",
 	}
 };
 

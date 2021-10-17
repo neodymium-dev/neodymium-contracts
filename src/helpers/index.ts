@@ -39,15 +39,17 @@ export function scanSiteAPIKey(hre: HardhatRuntimeEnvironment): string | undefin
 
     let network = hre.network;
 
+    let { scannerkeys } = hre.config;
+
     switch (network.config.chainId) {
         case 1: // ethereum mainnet
-            apiKey = process.env.ETHERSCAN_API_KEY;
+            apiKey = scannerkeys.etherscan;
             break;
         case 56: // bsc mainnet
-            apiKey = process.env.BSCSCAN_API_KEY;
+            apiKey = scannerkeys.bscscan;
             break;
         case 137: // polygon mainnet
-            apiKey = process.env.POLYGONSCAN_API_KEY;
+            apiKey = scannerkeys.polygonscan;
             break;
         default:
             break;

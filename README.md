@@ -6,14 +6,22 @@ Don't rely on anything you haven't personally audited and tested yourself. None 
 
 ## Useful contracts and libraries
 
-- [ERC165](contracts/erc165): A basic [base implementation](contracts/erc165/ERC165Base.sol)
-for working with ERC165 which can be inherited by any contract for near-immediate use, 
-together with [LibERC165](contracts/erc165/LibERC165.sol) for a few helper functions which make working with ERC165 that much easier. [Examples](contracts/erc165/example) are also included for a quickstart in working with this setup.
+- [Diamond](contracts/diamond): Contracts, interfaces, base facets, and libraries 
+for creating and working with EIP-2535 "Diamond" type contracts.
 
-- [StringUtil](contracts/utils/StringUtil.sol): Helper functions for strings. 
+  See [ens/diamond](contracts/ens/diamond) for example usage of AppStorage and facets. 
 
-- More to come?
+  See [scripts/deploy/deploy_ens.ts](src/scripts/deploy/deploy_ens.ts) for an example of deploying a full-fledged Diamond and facets.
 
-## ShittyRNG
+  See [scripts/deploy/deploy_diamond.ts](src/scripts/deploy/deploy_diamond.ts) for abstract/basic deployment of Diamonds,
+  including `DiamondCutFacet` and `DiamondLoupeFacet`.
 
-Just don't worry about it. 
+- [StringUtil](contracts/utils/StringUtil.sol): Helper functions for strings.
+
+- [ENS](contracts/ens): Implementations of ENS contracts and interfaces; currently, this only has implementations for resolver contracts.
+  I'm personally using the non-Diamond resolver implementation for my own ENS name, so I can attest to it actually working. 
+
+- [DiamondMaker](contracts/diamondmaker): Simplifies deployment of an EIP-2535 Diamond and its necessary facets (`DiamondCut`, `DiamondLoupe`, and `Ownership`)
+  using some `create2` magic. 
+
+- More to come.

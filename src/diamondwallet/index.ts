@@ -1,0 +1,1 @@
+export {DiamondWallet} from "./diamondwallet";

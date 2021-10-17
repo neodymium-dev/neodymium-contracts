@@ -33,3 +33,25 @@ export async function getContract(name: string, address: string, hre: HardhatRun
 
     return hre.ethers.getContractAt(providerAbi.abi, address, signer);
 }
+
+export function scanSiteAPIKey(hre: HardhatRuntimeEnvironment): string | undefined {
+    let apiKey: string | undefined;
+
+    let network = hre.network;
+
+    switch (network.config.chainId) {
+        case 1: // ethereum mainnet
+            apiKey = process.env.ETHERSCAN_API_KEY;
+            break;
+        case 56: // bsc mainnet
+            apiKey = process.env.BSCSCAN_API_KEY;
+            break;
+        case 137: // polygon mainnet
+            apiKey = process.env.POLYGONSCAN_API_KEY;
+            break;
+        default:
+            break;
+    }
+
+    return apiKey;
+}

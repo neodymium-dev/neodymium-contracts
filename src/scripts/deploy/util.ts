@@ -1,6 +1,6 @@
 import {HardhatRuntimeEnvironment, TaskArguments} from "hardhat/types";
 import {Contract, ContractReceipt, ContractTransaction, ethers} from "ethers";
-import {getNetwork, getSignedContractFactory} from "../../helpers";
+import {getNetwork, getSignedContractFactory, scanSiteAPIKey} from "../../helpers";
 
 export interface DeployResult {
     address: string,
@@ -60,13 +60,13 @@ export async function deployContract(
 
     verify = typeof(verify) !== 'undefined' ? verify : false;
 
-    let txReceipt: ContractReceipt = await deployTx.deployTransaction.wait(verify ? 5 : 1)
+    await deployTx.deployTransaction.wait(verify ? 5 : 1)
 
     const address: string = deployTx.address;
 
     console.log(`[${network}] ${contractName} address: ${address}`);
 
-    if (verify) {
+    if (verify && scanSiteAPIKey(hre)) {
         await verifyContract(hre, address, contractName, artifactPath, args);
     }
 
@@ -93,5 +93,10 @@ export async function verifyContract(
         taskArgs.contract = artifactPath
     }
 
-    await hre.run("verify:verify", taskArgs);
+    const apiKey = scanSiteAPIKey(hre);
+
+    if (apiKey) {
+        hre.config.etherscan.apiKey = apiKey;
+        await hre.run("verify:verify", taskArgs);
+    }
 }

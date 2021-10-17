@@ -1,0 +1,41 @@
+{
+  "name": "@neodymium-dev/contracts",
+  "version": "0.1.0",
+  "description": "Solidity utilities, contracts, and libraries.",
+  "main": "index.js",
+  "repository": "https://github.com/neodymium-dev/neodymium-contracts",
+  "files": [
+    "/contracts/**/*.sol"
+  ],
+  "author": "neodymium-dev",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "hardhat": "hardhat",
+    "build": "hardhat compile",
+    "test:diamondwallet": "hardhat --network bsc_testnet test ./test/diamondwallet-test.ts",
+    "flatten": "hardhat flatten",
+    "clean": "rm -rf ./cache",
+    "clean:all": "rm -rf ./cache ./artifacts",
+    "polygon": "hardhat --network polygon",
+    "bsc_testnet": "hardhat --network bsc_testnet"
+  },
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@nomiclabs/hardhat-etherscan": "^2.1.6",
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "@openzeppelin/contracts": "^4.3.2",
+    "@openzeppelin/contracts-upgradeable": "^4.3.2",
+    "@types/debug": "^4.1.7",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^16.10.3",
+    "chai": "^4.3.4",
+    "dotenv": "^10.0.0",
+    "ethers": "^5.4.7",
+    "hardhat": "^2.6.5",
+    "mocha": "^9.1.2",
+    "truffle-flattener": "^1.5.0",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.2"
+  }
+}
